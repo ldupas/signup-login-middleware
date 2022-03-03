@@ -69,6 +69,36 @@ router.post('/', async (req, res) => {
 
 })
 
+router.post('/login', async (req, res) => {
+  // on reprend ici les verif de donnees utilisateur dans le formulaire
+  const { value, error } = userSchema.validate(req.body);
+  
+  if (error) {
+    return res.status(400).json(error);
+  }
+
+  const [[existingUser]] = await findUserByEmail(value.email);
+
+  if (!existingUser) {
+    return res.status(403).json({
+      message: 'utilisateur no trouve ou le mot de passe ne correspond au compte'
+    })
+  }
+
+  const verified = await argon2.verify(existingUser.password, value.password)
+
+  if (!verified) {
+    return res.status(403).json({
+      message: 'utilisateur non trouve ou le mot de passe ne correspond au compte'
+    })
+  }
+
+  const jwtKey = generateJwt(value.email, 'ROLE_USER');
+  return res.json({
+    credentials: jwtKey
+  })
+})
+
 
 module.exports = router;
 // router.get('/', (req, res) => {

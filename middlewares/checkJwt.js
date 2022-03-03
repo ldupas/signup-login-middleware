@@ -6,6 +6,7 @@ const checkJwt = (req, res, next) => {
   if (!req.headers.authorization) {
     res.status(401).json();
   }
+
   try {
     jwt.verify(req.headers.authorization, process.env.JWT_SECRET);
     return next();
