@@ -22,6 +22,7 @@ CREATE TABLE `posts` (
     `title` varchar(255)  NOT NULL ,
     `content` TEXT  NOT NULL ,
     `user_id` int  NOT NULL ,
+    `picture` varchar(255) ,
     PRIMARY KEY (
         `id`
     )
@@ -29,19 +30,3 @@ CREATE TABLE `posts` (
 
 ALTER TABLE `posts` ADD CONSTRAINT `fk_posts_user_id` FOREIGN KEY(`user_id`)
 REFERENCES `users` (`id`);
-
-INSERT INTO users
-VALUES (
-    1,
-    'admin',
-    'test',
-    'admin@example.com'
-);
-
-INSERT INTO posts
-VALUES (
-    1,
-    'Bonjour',
-    'Je suis le contenu',
-    1
-);
