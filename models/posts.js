@@ -1,8 +1,7 @@
 const connection = require('../db-config');
 
-const findAll = () => {
-    connection
-    .promise()
+const findAll = async () => {
+    return connection.promise()
     .query('SELECT * FROM posts');
 }
 

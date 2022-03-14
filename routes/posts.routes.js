@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     res.json(posts);
 });
 
-router.post('/', upload.single('picture'), async (req, res) => {
+router.post('/', upload.single('picture'), upload.single('picture'), async (req, res) => {
     const [{ insertId: id}] = await insertPost(req.body, req.file.path);
 
     res.json({
