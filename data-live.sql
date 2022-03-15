@@ -18,15 +18,11 @@ CREATE TABLE `users` (
 );
 
 CREATE TABLE `posts` (
-    `id` int  NOT NULL ,
+    `id` int NOT NULL AUTO_INCREMENT,
     `title` varchar(255)  NOT NULL ,
     `content` TEXT  NOT NULL ,
-    `user_id` int  NOT NULL ,
     `picture` varchar(255) ,
     PRIMARY KEY (
         `id`
     )
 );
-
-ALTER TABLE `posts` ADD CONSTRAINT `fk_posts_user_id` FOREIGN KEY(`user_id`)
-REFERENCES `users` (`id`);
